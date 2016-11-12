@@ -7,7 +7,7 @@ import colors from 'colors/safe'
 import runPackageScript from '../index'
 import {
   getScriptsAndArgs, initialize, autocomplete, installAutocomplete,
-  help, preloadModule, loadConfig,
+  help, preloadModule, loadConfig, eject,
 } from '../bin-utils'
 import getLogger from '../get-logger'
 
@@ -27,6 +27,7 @@ program
   .option('-l, --log-level <level>', 'The log level to use (error, warn, info [default])')
   .option('-r, --require <module>', 'Module to preload')
   .on('init', onInit)
+  .on('eject', onEject)
   .on('completion', onRequestToInstallCompletion)
   .on('--help', onHelp)
   .parse(process.argv)
@@ -100,6 +101,11 @@ function onInit() {
     '  nps completion <optionally-your-bash-profile-file>\n' +
     'The bash profile file defaults to ~/.bash_profile for bash and ~/.zshrc for zsh'
   ))
+}
+
+function onEject() {
+  shouldRun = false
+  const {packageJsonPath, packageScriptsPath} = eject(getConfigType())
 }
 
 function getConfigType() {

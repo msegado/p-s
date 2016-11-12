@@ -9,6 +9,7 @@ import getLogger from '../get-logger'
 import {resolveScriptObjectToScript} from '../resolve-script-object-to-string'
 import initialize from './initialize'
 import {default as autocomplete, install as installAutocomplete} from './autocomplete'
+import eject from './eject'
 
 const log = getLogger()
 
@@ -48,7 +49,7 @@ function loadConfig(configPath) {
 
 export {
   getScriptsAndArgs, initialize, help, autocomplete, installAutocomplete,
-  getModuleRequirePath, preloadModule, loadConfig,
+  getModuleRequirePath, preloadModule, loadConfig, eject,
 }
 
 
